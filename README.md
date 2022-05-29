@@ -8,21 +8,40 @@ Duckietown was initially introduced by MIT and later adopted by many other unive
 ### Dependencies
 
 * Tensorflow
-* ROS
-* Ubuntu
+* ROS Noetic
+* Ubuntu 20.04.4 (focal)
 * YOLO v4
 
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
 ### Executing program
-
-* How to run the program
-* Step-by-step bullets
+* Set up and calibrate the duckiebot using the following [guide](https://docs.duckietown.org/daffy/opmanual_duckiebot/out/index.html)
+* Take a look at the ROS Wiki website to create a [workspace](https://wiki.ros.org/ROS/Tutorials/CreatingPackage)
+* Edit the .bashrc to change the name of your rosmaster and connect to your bot by adding this line at the end
 ```
-code blocks for commands
+export ROS_MASTER_URI=http://[name of your bot].local:11311
+```
+* Download the repository
+```
+cd catkin_workspace/src
+```
+```
+git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
+```
+
+
+```
+code
+```
+```
+code
+```
+```
+code
+```
+```
+code
+```
+```
+code
 ```
 
 ## Help
@@ -34,9 +53,13 @@ command to run if program contains helper info
 
 ## Authors
 
+* Valentina Sanchez
 
-Valentina Sanchez
-Kim Eunhye
+* Kim Eunhye
 
-Under supervision of: Prof. Amr Alanwar Abdelhafez
+* Under supervision of: Prof. Amr Alanwar Abdelhafez
 
+## Resources
+
+* https://roboticsknowledgebase.com/wiki/machine-learning/ros-yolo-gpu/
+* https://github.com/leggedrobotics/darknet_ros
