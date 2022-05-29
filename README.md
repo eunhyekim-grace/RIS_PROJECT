@@ -1,17 +1,16 @@
 # RIS_PROJECT - Object Detection
 
-Simple overview of use/purpose.
+Duckietown was initially introduced by MIT and later adopted by many other universities who saw its potential and outreach effort. A cheap platform, in comparison to a car, for which one can teach an advanced autonomy class anywhere. In our efforts to bring another contribution to this class, my partner and I focused on the concept of object detection. Where we used architectures such as YOLOv4 and ROS together to make this happen.
 
-## Description
-
-An in-depth paragraph about your project and overview of use.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Tensorflow
+* ROS
+* Ubuntu
+* YOLO v4
 
 ### Installing
 
@@ -35,22 +34,9 @@ command to run if program contains helper info
 
 ## Authors
 
-Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+Valentina Sanchez
+Kim Eunhye
 
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
+Under supervision of: Prof. Amr Alanwar Abdelhafez
 
