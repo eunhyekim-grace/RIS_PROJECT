@@ -15,41 +15,31 @@ Duckietown was initially introduced by MIT and later adopted by many other unive
 ### Executing program
 * Set up and calibrate the duckiebot using the following [guide](https://docs.duckietown.org/daffy/opmanual_duckiebot/out/index.html)
 * Take a look at the ROS Wiki website to create a [workspace](https://wiki.ros.org/ROS/Tutorials/CreatingPackage)
-* Edit the .bashrc to change the name of your rosmaster and connect to your bot by adding this line at the end
-```
-export ROS_MASTER_URI=http://[name of your bot].local:11311
-```
 * Download the repository
 ```
-cd catkin_workspace/src
+cd catkin_ws/src
 ```
 ```
-git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
+git clone --recursive THIS GITHUB
+```
+* Build
+```
+catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+* Modify “ros.yaml” with the correct camera topic
+* "my_object_detect.yaml" to configure the model files and detected classes
+* Modify “darknet_ros.launch” with the correct YAML file (“my_object_detect.yaml”)
+* Run
+```
+catkin_make
+```
+```
+source devel/setup.bash
+```
+```
+roslaunch darknet_ros darknet_ros.launch
 ```
 
-
-```
-code
-```
-```
-code
-```
-```
-code
-```
-```
-code
-```
-```
-code
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
 
 ## Authors
 
