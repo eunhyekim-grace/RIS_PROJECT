@@ -20,7 +20,7 @@ Duckietown was initially introduced by MIT and later adopted by many other unive
 cd catkin_ws/src
 ```
 ```
-git clone --recursive THIS GITHUB
+git clone --recursive git@github.com:vsancnaj/RIS_PROJECT.git
 ```
 * Build
 ```
