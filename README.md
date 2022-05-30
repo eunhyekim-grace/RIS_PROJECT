@@ -52,7 +52,7 @@ Forked version of Alexey's darknet git repository and duckietown object detectio
 
 #### installing dependencies in ubuntu
 
-If you are planning to run a project in google colab, you can skip all codes down below. There is colab file named YOLO v4, and you can follow the codes and explanations there. 
+If you are planning to run a project in google colab, you can skip all codes down below. There is colab python file named YOLO v4, and you can follow the codes and explanations there. 
 
 * CMake >= 3.8
 ```
@@ -196,7 +196,9 @@ for i in range(num):
         f1.write('\n')
 ```
 #### create new files and modify darknet
-* create obj folder
+* create obj.data folder
+
+it contains directory information for the train, valid data, name of each class, and model weight.
 ```
 with open(obj_path+'obj.data','w')as f:
   f.write('classes = 7\n')
@@ -205,7 +207,52 @@ with open(obj_path+'obj.data','w')as f:
   f.write('names=data/obj.names\n')
   f.write('backup=backup/')
 ```
+* create obj.names folder
 
+it has name of each class in an order
+```
+Duckie
+Duckiebot
+Intersection sign
+QR code
+Signal sign
+Stop sign
+Traffic light
+```
+* create txt file
+
+Create train.txt file and test.txt file by saving name of each data with the corresponding directory by separating custom data in 9:1 ratio
+* modify cfg file
+
+cfg file decides the model architecture and hyper-parameter of the model
+```
+cd /content/gdrive/MyDrive/yolov4/darknet/cfg
+
+#!sed -i 's/batch=1/batch=64/g' yolov4-custom.cfg
+#!sed -i 's/subdivisions=1/subdivisions=16/g' yolov4-custom.cfg
+!sed -i 's/width=608/width=416/g' yolov4-custom.cfg
+!sed -i 's/height=608/height=416/g' yolov4-custom.cfg
+!sed -i 's/max_batches = 500500/max_batches = 14000/g' yolov4-custom.cfg
+!sed -i 's/steps=400000,450000/steps=11200,12600/g' yolov4-custom.cfg
+!sed -i 's/classes=80/classes=7/g' yolov4-custom.cfg
+!sed -i 's/filters=256/filters=36/g' yolov4-custom.cfg
+
+cd ..
+```
+* download pretrained weight
+```
+wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
+```
+* train the model
+```
+cd /content/gdrive/MyDrive/yolov4/darknet
+chmod +x ./darknet
+./darknet detector train data/obj.data cfg/yolov4-custom.cfg yolov4.conv.137 -dont_show -ext_output -map
+```
+* performance check
+```
+./darknet detector map data/obj.data cfg/yolov4-custom.cfg /content/gdrive/MyDrive/yolov4/darknet/backup/yolov4-custom_last.weights -points 0
+```
 
 ## Authors
 
@@ -221,3 +268,4 @@ with open(obj_path+'obj.data','w')as f:
 * https://github.com/leggedrobotics/darknet_ros
 * https://github.com/AlexeyAB/darknet
 * https://robocademy.com/2020/05/01/a-gentle-introduction-to-yolo-v4-for-object-detection-in-ubuntu-20-04/
+* https://medium.com/geekculture/train-a-custom-yolov4-object-detector-on-linux-49b9114b9dc8
