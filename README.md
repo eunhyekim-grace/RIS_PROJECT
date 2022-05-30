@@ -253,6 +253,12 @@ chmod +x ./darknet
 ```
 ./darknet detector map data/obj.data cfg/yolov4-custom.cfg /content/gdrive/MyDrive/yolov4/darknet/backup/yolov4-custom_last.weights -points 0
 ```
+* test the model with image data
+
+prediction image is created and it automatically saved in the darknet folder. if you want to know how to show the image directly, please see google colab python code
+```
+./darknet detector test data/obj.data cfg/yolov4-custom-test.cfg /content/gdrive/MyDrive/yolov4/darknet/backup/yolov4-custom_last.weights /content/gdrive/MyDrive/yolov4/darknet/data/obj/B_BR_Duckbar_frame00052.jpg -thresh 0.3 
+```
 
 ## Authors
 
