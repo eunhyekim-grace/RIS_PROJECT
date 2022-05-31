@@ -46,7 +46,7 @@ roslaunch darknet_ros darknet_ros.launch
 
 ## Yolov4 using Darknet
 
-Forked version of Alexey's darknet git repository and duckietown object detection git repository has been used in this project. We used google colaboratory for the custom data training in order to train our model fast using gpu. Google colab allows the user to use Nvidia gpu for the limited amount of time. 
+In this project, we used Alexey's darknet git repository and duckietown object detection git repository. Since the overall file size is too big, uploading files on github is not allowed, so we uploaded modified or created files only in this repository. You should ask TA for the whole project file. Darknet supports both cpu and gpu model. Down below is detailed code and explanation of implementing yolo using darknet in your own local computer. However, we used google colab, which allows the user to use Nvidia gpu for the limited amount of time, for our project and custom data training since we both don't have gpu and it will take long time for the model training. Therefore, we recommend to work on a google colab by following our project code if you have cpu only model. We wrote detailed explanation of each steps in jupyter notebook file named YOLO_v4.
 
 ### Build project
 
@@ -108,7 +108,7 @@ ZED_CAMERA_v2_8=0
 cd darknet
 make
 ```
-if you succeed in building you will find darknet in build path
+If you succeed in building you will find darknet execution file in build path.
 * download weight
 ```
 wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
@@ -130,7 +130,8 @@ cd darknet/data
 git clone https://github.com/duckietown/duckietown-objdet
 ```
 ##### custom data xml to yolo annotation 
-you should create run below codes in python or in jupyter notebook
+
+In this step, you need to create separate python file and run file after copying below codes.
 
 * import libraries
 ``` 
@@ -141,7 +142,7 @@ import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import numpy as np
 ```
-set each directory for the xml and image data files in duckietown data and read name of each files. 
+Set each directory for the xml and image data files in duckietown data and read name of each files. 
 
 * find class name and how many class indices we have
 ```
@@ -162,7 +163,7 @@ unique_obj_name_list, len(unique_obj_name_list)
 
 
 The xml file has both general information, like file name and image size, and detailed information, like object name and bounding box size, on each object. However, yolo annotation has the same number of lines with the number of objects in each image and each line has 5 different pieces of informations: class number, x coordinate, y coordinate, width, height. Except class numbers, 4 different numbers should be normalized between 0 and 1. 
-below is how to convert xml data to yolo annotation
+Below is how to convert xml data to yolo annotation.
 ```
 bw = xmax - xmin
 bh = ymax - ymin
@@ -171,7 +172,7 @@ y_center_coordinate = (ymin +(bh/2))/ih)
 yolo_width = bw/iw
 yolo_height = bh/ih
 ```
-below is python code 
+Below is python code.
 ```
 iw = 640
 ih = 480
@@ -196,20 +197,20 @@ for i in range(num):
         f1.write('\n')
 ```
 #### create new files and modify darknet
+
 * create obj.data folder
 
-it contains directory information for the train, valid data, name of each class, and model weight.
+It contains directory information for the train, valid data, name of each class, and model weight.
 ```
-with open(obj_path+'obj.data','w')as f:
-  f.write('classes = 7\n')
-  f.write('train=data/train.txt\n')
-  f.write('valid=data/test.txt\n')
-  f.write('names=data/obj.names\n')
-  f.write('backup=backup/')
+classes=7
+train=data/train.txt
+valid=data/test.txt
+names=data/obj.names
+backup=backup/
 ```
 * create obj.names folder
 
-it has name of each class in an order
+It has name of each class in a corresponding order.
 ```
 Duckie
 Duckiebot
@@ -221,7 +222,7 @@ Traffic light
 ```
 * create txt file
 
-Create train.txt file and test.txt file by saving name of each data with the corresponding directory by separating custom data in 9:1 ratio
+Create train.txt file and test.txt file by saving name of each data with the corresponding directory by separating custom data in 9:1 ratio.
 * modify cfg file
 
 cfg file decides the model architecture and hyper-parameter of the model
@@ -255,7 +256,7 @@ chmod +x ./darknet
 ```
 * test the model with image data
 
-prediction image is created and it automatically saved in the darknet folder. if you want to know how to show the image directly, please see google colab python code
+Prediction image is created and it automatically saved in the darknet folder. If you want to know how to show the image directly, please check python code in jupyter notebook file named YOLO_v4. 
 ```
 ./darknet detector test data/obj.data cfg/yolov4-custom-test.cfg /content/gdrive/MyDrive/yolov4/darknet/backup/yolov4-custom_last.weights /content/gdrive/MyDrive/yolov4/darknet/data/obj/B_BR_Duckbar_frame00052.jpg -thresh 0.3 
 ```
