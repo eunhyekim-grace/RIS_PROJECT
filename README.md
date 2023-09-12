@@ -162,7 +162,7 @@ unique_obj_name_list, len(unique_obj_name_list)
 *read pascal voc xml file and convert it into yolo txt file
 
 
-The xml file has both general information, like file name and image size, and detailed information, like object name and bounding box size, on each object. However, yolo annotation has the same number of lines with the number of objects in each image and each line has 5 different pieces of informations: class number, x coordinate, y coordinate, width, height. Except class numbers, 4 different numbers should be normalized between 0 and 1. 
+The xml file has both general information, file name and image size, and detailed information, including object name and bounding box size on each object. However, yolo annotation has the same number of lines with the number of objects in each image and each line has 5 different pieces of informations: class number, x coordinate, y coordinate, width, height. Except class numbers, and 4 different numbers should be normalized between 0 and 1. 
 Below is how to convert xml data to yolo annotation.
 ```
 bw = xmax - xmin
